@@ -34,7 +34,7 @@ export class AppComponent{
     this.data.annotation.push(localVar);
     var listUL = <HTMLInputElement>document.getElementById('annotations');
     var ulOption = document.createElement('li');
-    ulOption.innerHTML = selection + "   " + label;
+    ulOption.innerHTML = label + " - " + selection;
     listUL.appendChild(ulOption);
 
     console.log(this.data);
