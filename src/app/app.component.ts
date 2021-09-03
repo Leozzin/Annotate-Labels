@@ -1,7 +1,8 @@
 
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import axios from 'axios';
+import * as qs from 'qs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -42,6 +43,13 @@ export class AppComponent{
 
   downloadJson(){
     var theJSON = JSON.stringify(this.data);
+    axios.post(
+      "http://127.0.0.1:8000/addAnnotation/",
+      qs.stringify({
+        document: this.data.document,
+        annotations: this.data.annotation
+      })
+    );
     var element = document.createElement('a');
     element.setAttribute('href', "data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
     element.setAttribute('download', "file.json");
@@ -49,6 +57,7 @@ export class AppComponent{
     document.body.appendChild(element);
     element.click(); // simulate click
     document.body.removeChild(element);
+
   }
 }
 
